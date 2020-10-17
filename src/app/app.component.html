@@ -6,13 +6,19 @@
 
   <div class="form-group">
     <label for="user">E-mail: </label>
-    <input type="email" name="login" class="form-control" [(ngModel)] = "usuario.login" id="login" placeholder="Informe o username" required>
+    <input type="email" name="login" class="form-control" #email="ngModel" [(ngModel)] = "usuario.login" id="login" required>
+    <div *ngIf="email.invalid" class="alert alert-danger">
+      Login deve ser informado
+    </div>
   </div>
 
   <div class="form-group">
     <label for="senha">Senha: </label>
-    <input type="password" name="senha" class="form-control" [(ngModel)] = "usuario.senha" id="senha" placeholder="Informe a senha" required>
+    <input type="password" name="senha" class="form-control" #senha="ngModel" [(ngModel)] = "usuario.senha" id="senha" required>
+    <div *ngIf="senha.invalid" class="alert alert-danger">
+      Senha deve ser informado
+    </div>
   </div>
 
-  <button type="button" class="btn btn-primary" (click)="login()">Acessar</button>
+  <button type="button" [disabled]="email.invalid || senha.invalid" class="btn btn-primary" (click)="login()">Acessar</button>
 </form>
